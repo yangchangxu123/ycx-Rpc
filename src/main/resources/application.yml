@@ -1,0 +1,9 @@
+# slf4j日志配置
+logging:
+  # 配置级别
+  level:
+    root: info
+    #分包配置级别，即不同的目录下可以使用不同的级别
+    com.example.springb_web.controller: debug
+  # slf4j日志配置文件
+  config: classpath:logback.xml
