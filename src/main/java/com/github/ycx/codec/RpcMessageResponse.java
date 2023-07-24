@@ -48,7 +48,7 @@ public class RpcMessageResponse {
      * @param result 响应成功结果
      * @return RpcMessageResponse
      */
-    public RpcMessageResponse ok(Object result){
+    public static RpcMessageResponse ok(Object result){
         RpcMessageResponse response = new RpcMessageResponse();
         response.setSuccess(true);
         response.setResult(result);
@@ -60,7 +60,7 @@ public class RpcMessageResponse {
      * @param errorMessage 失败信息
      * @return RpcMessageResponse
      */
-    public RpcMessageResponse fail(String errorMessage){
+    public static RpcMessageResponse fail(String errorMessage){
         RpcMessageResponse response = new RpcMessageResponse();
         response.setSuccess(false);
         response.setMsg(errorMessage);

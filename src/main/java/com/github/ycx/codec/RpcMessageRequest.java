@@ -43,7 +43,7 @@ public class RpcMessageRequest {
         this.param = param;
     }
 
-    public RpcMessageRequest wrap(String bizCode , Object param){
+    public static RpcMessageRequest wrap(String bizCode , Object param){
         RpcMessageRequest rpcMessageRequest = new RpcMessageRequest();
         rpcMessageRequest.setBizCode(bizCode);
         rpcMessageRequest.setParam(param);

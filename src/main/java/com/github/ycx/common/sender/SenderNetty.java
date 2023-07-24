@@ -103,4 +103,18 @@ public class SenderNetty implements Sender {
             throw new RuntimeException("Rpc request msg`s  type must be ``com/github/ycx/codec/RpcMessageRequest``");
         }
     }
+
+    /**
+     * 完成响应
+     * @param rId   请求id
+     * @param response 响应报文
+     */
+    public static void done(String rId,Object response){
+        RpcFuture rpcFuture = pendingFuture.get(rId);
+        if (rpcFuture != null){
+            pendingFuture.remove(rId);
+            rpcFuture.done(response);
+        }
+    }
+
 }

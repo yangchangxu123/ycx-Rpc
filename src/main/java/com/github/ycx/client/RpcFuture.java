@@ -5,7 +5,7 @@ import com.github.ycx.codec.RpcMessageResponse;
 import java.util.concurrent.*;
 
 /**
- * Netty RpcFuture
+ * 自定义 Netty RpcFuture
  * @author Yangcx
  * @create 2023/7/19 21:37
  */
@@ -84,6 +84,10 @@ public class RpcFuture implements Future<Object> {
         throw new RuntimeException("Rpc TimeOut Exception，request id is" + rId);
     }
 
+    /**
+     * 完成响应
+     * @param response 响应报文
+     */
     public void done(Object response){
         this.response = response;
         downLatch.countDown();

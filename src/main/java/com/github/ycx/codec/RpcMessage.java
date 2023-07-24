@@ -2,6 +2,8 @@ package com.github.ycx.codec;
 
 import com.github.ycx.utils.Utils;
 
+import java.util.Objects;
+
 /**
  * 传输报文 ，创建发送报文、响应报文
  * @author Yangcx
@@ -29,7 +31,7 @@ public class RpcMessage {
      * @param request 请求
      * @return RpcMessage
      */
-    public RpcMessage createRequest(RpcMessageRequest request){
+    public static RpcMessage createRequest(RpcMessageRequest request){
         RpcMessage rpcMessage = new RpcMessage();
         rpcMessage.traceId = Utils.getRequestId();
         rpcMessage.direction = REQUEST;
@@ -43,7 +45,7 @@ public class RpcMessage {
      * @param response  响应
      * @return RpcMessage
      */
-    public RpcMessage createResponse(String traceId ,RpcMessageResponse response){
+    public static RpcMessage createResponse(String traceId ,RpcMessageResponse response){
         RpcMessage rpcMessage = new RpcMessage();
         rpcMessage.traceId = traceId;
         rpcMessage.direction = RESPONSE;
@@ -51,6 +53,29 @@ public class RpcMessage {
         return rpcMessage;
     }
 
+    /**
+     *  获取请求消息
+     * @return RpcMessageRequest
+     */
+    public RpcMessageRequest getRequest(){
+        if (Objects.equals(this.direction,REQUEST)){
+            RpcMessageRequest request = (RpcMessageRequest) this.content;
+            request.setRid(this.traceId);
+            return request;
+        }
+        throw  new RuntimeException("RpcMessage Type not be request!");
+    }
+
+    /**
+     * 获取响应消息
+     * @return RpcMessageResponse
+     */
+    public RpcMessageResponse getResponse(){
+        if (Objects.equals(this.direction,RESPONSE)){
+            return (RpcMessageResponse) this.content;
+        }
+        throw  new RuntimeException("RpcMessage Type not be response!");
+    }
 
     public String getTraceId() {
         return traceId;
